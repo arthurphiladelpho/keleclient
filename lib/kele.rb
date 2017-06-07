@@ -21,9 +21,18 @@ class Kele
 		@current_user.each do |key, value|
 		  if key == "name"
 		  	puts "Current user is #{value}."
-		  	return value
+		  end
+		  if key == "id"
+		  	@id = value
 		  end
 		end	
+		puts "Id was set to #{@id}."
+		return @current_user
+	end
+
+	def get_mentor_availability(id)
+		response = self.class.get("/mentors/#{id}/student_availability", headers: { "authorization" => @auth_token } )	
+		@mentor_availability = JSON.parse(response.body)
 	end
 
 end
