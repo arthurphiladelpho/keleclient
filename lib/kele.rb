@@ -31,8 +31,8 @@ class Kele
     @messages = JSON.parse(response.body)
   end
 
-  def create_message(id, recipient_id, subject, message)
-    response = self.class.post("/messages", body: { "user_id": id, "recipient_id": recipient_id, "subject": subject, "stripped-text": message }, headers: { "authorization" => @auth_token })
+  def create_message(email, recipient_id, subject, message)
+    response = self.class.post("/messages", body: { sender: email, recipient_id: recipient_id, subject: subject, "stripped-text": message }, headers: { "authorization" => @auth_token })
     puts response
   end
 
