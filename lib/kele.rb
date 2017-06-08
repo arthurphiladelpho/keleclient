@@ -31,6 +31,7 @@ class Kele
     response = JSON.parse(response.body)
     @roadmap = response["name"]
     puts "Your roadmaps is #{@roadmap}."
+    puts response
     return @roadmap
     # checkpoint id is response["sections"]["checkpoints"]["id" == 1901]
   end
