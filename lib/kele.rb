@@ -18,16 +18,8 @@ class Kele
 	def get_me
 		response = self.class.get("/users/me", headers: { "authorization" => @auth_token } )
 		@current_user = JSON.parse(response.body)
-		@current_user.each do |key, value|
-		  if key == "name"
-		  	puts "Current user is #{value}."
-		  end
-		  if key == "id"
-		  	@id = value
-		  end
-		end	
-		puts "Id was set to #{@id}."
-		return @current_user
+		puts @current_user["name"]
+		@current_user
 	end
 
 	def get_mentor_availability(id)
