@@ -18,12 +18,8 @@ class Kele
 	def get_me
 		response = self.class.get("/users/me", headers: { "authorization" => @auth_token } )
 		@current_user = JSON.parse(response.body)
-		@current_user.each do |key, value|
-		  if key == "name"
-		  	puts "Current user is #{value}."
-		  	return value
-		  end
-		end	
+		puts @current_user["name"]
+		@current_user
 	end
 
 	def get_messages(page)
@@ -32,8 +28,8 @@ class Kele
   end
 
   def create_message(email, recipient_id, subject, message)
-    response = self.class.post("/messages", body: { sender: email, recipient_id: recipient_id, subject: subject, "stripped-text": message }, headers: { "authorization" => @auth_token })
-    puts response
+    response = self.class.post("/messages", body: { "sender": email, "recipient_id": recipient_id, "subject": subject, "stripped-text": message }, headers: { "authorization" => @auth_token })
+    @message = response
   end
 
 end
