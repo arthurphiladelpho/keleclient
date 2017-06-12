@@ -18,16 +18,12 @@ class Kele
 	def get_me
 		response = self.class.get("/users/me", headers: { "authorization" => @auth_token } )
 		@current_user = JSON.parse(response.body)
-		@current_user.each do |key, value|
-		  if key == "name"
-		  	puts "Current user is #{value}."
-		  	return value
-		  end
-		end	
+		puts @current_user["name"]
+		@current_user
 	end
 
 	def create_submissions(checkpoint_id, assignment_branch, assignment_commit_link, comment)
-    response = self.class.post("checkpoint_submissions", body: { "checkpoint_id": checkpoint_id, "assignment_branch": assignment_branch, "assignment_commit_link": assignment_commit_link, "comment": comment }, headers: { "authorization" => @auth_token })
+    response = self.class.post("/checkpoint_submissions", body: { "checkpoint_id": checkpoint_id, "assignment_branch": assignment_branch, "assignment_commit_link": assignment_commit_link, "comment": comment }, headers: { "authorization" => @auth_token })
     puts response
   end
 
