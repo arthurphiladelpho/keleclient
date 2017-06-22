@@ -24,12 +24,12 @@ class Kele
 
 	def get_messages(page)
     response = self.class.get("/message_threads?page=#{page}", headers: { "authorization" => @auth_token })
-    @messages = JSON.parse(response.body)
+    JSON.parse(response.body)
   end
 
   def create_message(email, recipient_id, subject, message)
     response = self.class.post("/messages", body: { "sender": email, "recipient_id": recipient_id, "subject": subject, "stripped-text": message }, headers: { "authorization" => @auth_token })
-    @message = response
+    JSON.parse(response.body)
   end
 
 end
