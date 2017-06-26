@@ -7,7 +7,6 @@ module Roadmap
     puts "Your roadmaps is #{@roadmap}."
     puts response
     return @roadmap
-    # checkpoint id is response["sections"]["checkpoints"]["id" == 1901]
   end
 
   def get_checkpoint(checkpoint_id)
